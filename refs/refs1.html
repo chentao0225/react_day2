@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>refs与事件处理</title>
+</head>
+<body>
+<div id="example"></div>
+<script src="../js/react.development.js"></script>
+<script src="../js/react-dom.development.js"></script>
+<script src="../js/babel.min.js"></script>
+<script type="text/babel">
+    class UserInput extends React.Component{
+        clickHandler=()=>{
+            let {input1}=this.refs;
+            alert(input1.value);
+        };
+        onBlurHandler=(event)=>{
+            alert(event.target.value);
+        };
+        render() {
+            return(
+                <div>
+                    <input type="text" ref="input1"/>&nbsp;
+                    <button onClick={this.clickHandler}>点我提示</button>&nbsp;
+                    <input type="text" onBlur={this.onBlurHandler}/>&nbsp;
+                </div>
+            );
+        }
+    }
+    ReactDOM.render(<UserInput/>,document.getElementById('example'));
+</script>
+</body>
+</html>
