@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组合使用2</title>
+</head>
+<body>
+<div id="example"></div>
+<script src="../js/react.development.js"></script>
+<script src="../js/react-dom.development.js"></script>
+<script src="../js/babel.min.js"></script>
+<script type="text/babel">
+    /*
+ 需求: 自定义包含表单的组件
+   1. 界面如图所示
+   2. 输入用户名密码后, 点击登陆提示输入信息
+   3. 密码是点击时候直接获取的，用户名是当用户输入时存入状态
+   3. 不提交表单
+ */
+    class Login extends React.Component{
+        myRef=React.createRef();
+        state={userName:''};
+        clickHandler=(event)=>{
+            let {userName}=this.state;
+            let pwd=this.myRef.current;
+            alert(`您输入的用户名为：${userName},密码是：${pwd.value}`);
+            event.preventDefault();
+        };
+        changeHandler=(event)=>{
+            let{userName}=this.state;
+            let name=event.target.value;
+            userName=name;
+            this.setState({userName});
+        };
+        render(){
+            return (
+                <form action="">
+                    用户名：<input type="text" onChange={this.changeHandler}/>&nbsp;
+                    密码：<input type="password" ref={this.myRef}/>&nbsp;
+                    <button onClick={this.clickHandler}>提交</button>
+                </form>
+            );
+        }
+    }
+    ReactDOM.render(<Login/>,document.getElementById('example'));
+</script>
+</body>
+</html>
